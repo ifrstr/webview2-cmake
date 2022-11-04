@@ -44,11 +44,19 @@ if (NOT EXISTS WEBVIEW2_PACKAGE_DIR)
 endif()
 
 add_library(webview2 INTERFACE)
+add_library(webview2_static INTERFACE)
 
 target_include_directories(webview2 INTERFACE "${WEBVIEW2_PACKAGE_DIR}/build/native/include")
+target_include_directories(webview2_static INTERFACE "${WEBVIEW2_PACKAGE_DIR}/build/native/include")
 
-target_link_directories(
+target_link_libraries(
     webview2
     INTERFACE
-    ${WEBVIEW2_PACKAGE_DIR}/build/native/${WEBVIEW2_ARCH}/
+    ${WEBVIEW2_PACKAGE_DIR}/build/native/${WEBVIEW2_ARCH}/WebView2Loader.dll.lib
+)
+
+target_link_libraries(
+    webview2_static
+    INTERFACE
+    ${WEBVIEW2_PACKAGE_DIR}/build/native/${WEBVIEW2_ARCH}/WebView2LoaderStatic.lib
 )
